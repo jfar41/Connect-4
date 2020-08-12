@@ -1,14 +1,7 @@
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .container {
-    width: 320px;
-    height: 320px;
-    margin: autp;
+    width: 620px;
+    height: 620px;
+    margin: auto;
     margin-top: 100px;
 
 }
@@ -20,8 +13,8 @@ h1 {
 
 .row {
     height: 100px;
+    
 }
-
 .col {
     height: 100px;
     width: 100px;
