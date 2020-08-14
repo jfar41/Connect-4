@@ -94,6 +94,7 @@ function render() {
              }
         }  
     }
+    //////////////
 }            //if 1 make yellow (by this point already stated player 1 is yellow) n vice versa
 
 function horizontalCheck() {
