@@ -1,10 +1,4 @@
 /*---Constants---*/
-const lookup = {
-    '1': 'red',
-    '-1': 'yellow',
-    'null': 'white'
-  };
-
 
 /*---App's state variables---*/
 let board, turn, winner;
@@ -16,15 +10,17 @@ board = [
     [null,null,null,null,null,null, null],
     [null,null,null,null,null,null, null]
 ];
+let gotWinner = 'false';
 
 /*---cached element references---*/
 let table = document.querySelector('container');
 let cells = document.querySelectorAll('td');
 let tableRow = document.getElementsByClassName('row');
-let showCurrentPlayer= document.getElementById('message');
+let showCurrentMove= document.getElementById('message');
 //eventually will do indexHTML to tell whose current player and/or who won
 
 let currentPlayer= 1;
+
 /*---event listener---*/
 for(let i=0; i < cells.length;i++) {
     cells[i].addEventListener('click', (e) => {
@@ -60,12 +56,12 @@ function clickSlots(colIdx) {
             row--;
         }
     }      
-    console.log(board); 
-    // horizontalCheck();
-    // verticalCheck();
-    // diagonalCheckDownRight();
+    
+    horizontalCheck();
+    verticalCheck();
+    diagonalCheckDownRight();
     diagonalCheckDownLeft();
-
+    
     //have checks return gotWinner = true
     //when gotWinner = true stop game and ask to restart (or tell the player than they won)
     render();
@@ -94,7 +90,15 @@ function render() {
              }
         }  
     }
-    //////////////
+    finalWinner();
+    function finalWinner() {
+        if (gotWinner == 'p1') {
+            showCurrentMove.innerText = 'Player 1 Won!';
+        } 
+        if (gotWinner == 'p2') {
+            showCurrentMove.innerText = 'Player 2 Won!';
+        }
+    }
 }            //if 1 make yellow (by this point already stated player 1 is yellow) n vice versa
 
 function horizontalCheck() {
@@ -103,12 +107,12 @@ function horizontalCheck() {
         for (let j =0; j < board[i].length; j++) {
             if (board[i][j] + board[i][j+1] + board[i][j+2] + board[i][j+3] == 4) {
                 if (currentPlayer = 1) {
-                    alert('Current Player 1 won!');
+                    gotWinner = 'p1';
                     }
                 } 
             if (board[i][j] + board[i][j+1] + board[i][j+2] + board[i][j+3] == -4) {
                 if (currentPlayer = -1) {
-                    alert('Current Player 2 won!');
+                    gotWinner = 'p2';
                     }   
                 }            
         }
@@ -123,12 +127,12 @@ function verticalCheck() {
         for (let col =0; col <board[row].length; col++) {
             if (board[row][col] + board[row+1][col] + board[row+2][col] +board[row+3][col] == 4) {
                 if (currentPlayer = 1) {
-                    alert('Current Player 1 won!');
+                    gotWinner = 'p1';
                     } 
                 }
             if (board[row][col] + board[row+1][col] + board[row+2][col] +board[row+3][col] == -4) {
                 if (currentPlayer = 1) {
-                    alert('Current Player 2 won!');
+                    gotWinner = 'p2';
                     }
                 }
         }
@@ -143,12 +147,12 @@ function diagonalCheckDownRight() {
         for (let col =0; col <4; col++) {
             if (board[row][col] + board[row+1][col+1] + board[row+2][col+2] +board[row+3][col+3] == 4) {
                 if (currentPlayer = 1) {
-                    alert('Current Player 1 won!');
+                    gotWinner = 'p1';
                     } 
                 }
             if (board[row][col] + board[row+1][col+1] + board[row+2][col+2] +board[row+3][col+3] == -4) {
                 if (currentPlayer = -1) {
-                    alert('Current Player 2 won!');
+                    gotWinner = 'p2';
                     }
                 }
         }
@@ -163,12 +167,12 @@ function diagonalCheckDownLeft() {
         for (let col =0; col <4; col++) {
             if (board[row][col] + board[row-1][col+1] + board[row-2][col+2] +board[row-3][col+3] == 4) {
                 if (currentPlayer = 1) {
-                    alert('Current Player 1 won!');
+                    gotWinner = 'p1';
                     } 
                 }
             if (board[row][col] + board[row-1][col+1] + board[row-2][col+2] +board[row-3][col+3] == -4) {
                 if (currentPlayer = -1) {
-                    alert('Current Player 2 won!');
+                    gotWinner = 'p2';
                     }
                 }
         }
