@@ -1,4 +1,6 @@
 # Project-1 Connect Four
+## Screenshots 
+![Picture of game](https://i.imgur.com/M3c3zSa.png)
 ![Picture of Wireframe](https://i.imgur.com/bIIc6Kw.png)
 
 ## Technologies Used:
