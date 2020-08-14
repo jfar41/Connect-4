@@ -10,13 +10,15 @@ board = [
     [null,null,null,null,null,null, null],
     [null,null,null,null,null,null, null]
 ];
+
 let gotWinner = 'false';
 
 /*---cached element references---*/
-let table = document.querySelector('container');
+let table = document.querySelector('.container');
 let cells = document.querySelectorAll('td');
 let tableRow = document.getElementsByClassName('row');
 let showCurrentMove= document.getElementById('message');
+let restartMsg = document.getElementById('refresh');
 //eventually will do indexHTML to tell whose current player and/or who won
 
 let currentPlayer= 1;
@@ -40,42 +42,39 @@ for(let i=0; i < cells.length;i++) {
 //if board[i] ==null  && currentPlayer==1 {board.pop}
 
 /*---Functions---*/
-function clickSlots(colIdx) {
-    if (board[0][colIdx]) {
-        console.log('this role is filled');
-        return 
-    }
-    let isFilled = true;
-    let row = 5;
-    while (isFilled && row>=0) {
-        if (board[row][colIdx]== null) {
-            board[row][colIdx] = currentPlayer;
-            isFilled= false;
-            currentPlayer *= -1;
-        } else {
-            row--;
-        }
-    }      
-    
-    horizontalCheck();
-    verticalCheck();
-    diagonalCheckDownRight();
-    diagonalCheckDownLeft();
-    
-    //have checks return gotWinner = true
-    //when gotWinner = true stop game and ask to restart (or tell the player than they won)
-    render();
-}
 
-initialize();
+
 
 //to reference for win logic
-function initialize() {
-   turn = 1;
-    winner = null; 
-} 
+    function clickSlots(colIdx) {
+        if (board[0][colIdx]) {
+            console.log('this role is filled');
+            return 
+        }
+        let isFilled = true;
+        let row = 5;
+        while (isFilled && row>=0) {
+            if (board[row][colIdx]== null) {
+                board[row][colIdx] = currentPlayer;
+                isFilled= false;
+                currentPlayer *= -1;
+            } else {
+                row--;
+            }
+        }      
+        
+        horizontalCheck();
+        verticalCheck();
+        diagonalCheckDownRight();
+        diagonalCheckDownLeft();
+        
+        //have checks return gotWinner = true
+        //when gotWinner = true stop game and ask to restart (or tell the player than they won)
+        render();
+    }
+   
+
 function render() {
-    console.log('rendering');
     //loop thru board and color circle depending on what's insde each element
     for(let row=0; row<board.length; row++) {
         for(let col=0; col< board[row].length; col++) {
@@ -85,20 +84,10 @@ function render() {
             } else if (board[row][col] == -1) {
                 const cell = document.querySelector(`#row-${row}`).querySelector(`#col-${col}`);
                 cell.style.backgroundColor = 'yellow';
-            } else {
-                //  cells.style.backgroundColor = 'white';
-             }
+            } 
         }  
     }
     finalWinner();
-    function finalWinner() {
-        if (gotWinner == 'p1') {
-            showCurrentMove.innerText = 'Player 1 Won!';
-        } 
-        if (gotWinner == 'p2') {
-            showCurrentMove.innerText = 'Player 2 Won!';
-        }
-    }
 }            //if 1 make yellow (by this point already stated player 1 is yellow) n vice versa
 
 function horizontalCheck() {
@@ -176,5 +165,18 @@ function diagonalCheckDownLeft() {
                     }
                 }
         }
+    }
+}
+
+function finalWinner() {
+    if (gotWinner == 'p1') {
+        showCurrentMove.innerText = 'Player 1 Won!';
+        table.style.backgroundColor= 'white';
+        restartMsg.innerText = 'Refresh the page to play again!'
+    } 
+    if (gotWinner == 'p2') {
+        showCurrentMove.innerText = 'Player 2 Won!';
+        table.style.backgroundColor='white';
+        restartMsg.innerText = 'Refresh the page to play again!'
     }
 }

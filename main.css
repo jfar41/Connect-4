@@ -3,6 +3,11 @@ h1 {
     font-size: 100px;
 }
 
+h4 {
+    text-align: center;
+    font-size: 30px;
+}
+
 .container {
     width: 720px;
     height: 720px;
@@ -29,5 +34,11 @@ h1 {
 #message {
     font-size: 100px;
     color: green;
+    text-align: center;
+}
+
+#refresh {
+    font-size: 40px;
+    color: red;
     text-align: center;
 }
