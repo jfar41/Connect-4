@@ -62,8 +62,10 @@ function clickSlots(colIdx) {
     }      
     console.log(board); 
     // horizontalCheck();
-    verticalCheck();
-    // diagonalCheck()
+    // verticalCheck();
+    diagonalCheckDownRight();
+    //have checks return gotWinner = true
+    //when gotWinner = true stop game and ask to restart (or tell the player than they won)
     render();
 }
 
@@ -123,6 +125,26 @@ function verticalCheck() {
                 }
             if (board[row][col] + board[row+1][col] + board[row+2][col] +board[row+3][col] == -4) {
                 if (currentPlayer = 1) {
+                    alert('Current Player 2 won!');
+                    }
+                }
+        }
+    }
+}
+
+function diagonalCheckDownRight() {
+    // console.log('inside horizontal');
+    //row < 3 to limit checks to defined boundaries. check can only happen if less than
+    //first 3 rows bc if starts at 4rd row(idx 3), then you go outside the board
+    for (let row =0; row <3; row++) {
+        for (let col =0; col <4; col++) {
+            if (board[row][col] + board[row+1][col+1] + board[row+2][col+2] +board[row+3][col+3] == 4) {
+                if (currentPlayer = 1) {
+                    alert('Current Player 1 won!');
+                    } 
+                }
+            if (board[row][col] + board[row+1][col+1] + board[row+2][col+2] +board[row+3][col+3] == -4) {
+                if (currentPlayer = -1) {
                     alert('Current Player 2 won!');
                     }
                 }
