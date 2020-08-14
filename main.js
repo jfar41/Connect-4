@@ -61,8 +61,8 @@ function clickSlots(colIdx) {
         }
     }      
     console.log(board); 
-    horizontalCheck();
-    // verticalCheck();
+    // horizontalCheck();
+    verticalCheck();
     // diagonalCheck()
     render();
 }
@@ -93,18 +93,39 @@ function render() {
 }            //if 1 make yellow (by this point already stated player 1 is yellow) n vice versa
 
 function horizontalCheck() {
-    console.log('inside getW')
+    console.log('inside horizontal');
     for (let i =0; i <board.length; i++) {
         for (let j =0; j < board[i].length; j++) {
             if (board[i][j] + board[i][j+1] + board[i][j+2] + board[i][j+3] == 4) {
                 if (currentPlayer = 1) {
-            alert('Current Player 1 won!');}
-        } 
+                    alert('Current Player 1 won!');
+                    }
+                } 
             if (board[i][j] + board[i][j+1] + board[i][j+2] + board[i][j+3] == -4) {
                 if (currentPlayer = -1) {
-            alert('Current Player 2 won!');}
-    } 
+                    alert('Current Player 2 won!');
+                    }   
+                }            
         }
-        
+    }
+}
+
+function verticalCheck() {
+    // console.log('inside horizontal');
+    //row < 3 to limit checks to defined boundaries. check can only happen if less than
+    //first 3 rows bc if starts at 4rd row(idx 3), then you go outside the board
+    for (let row =0; row <3; row++) {
+        for (let col =0; col <board[row].length; col++) {
+            if (board[row][col] + board[row+1][col] + board[row+2][col] +board[row+3][col] == 4) {
+                if (currentPlayer = 1) {
+                    alert('Current Player 1 won!');
+                    } 
+                }
+            if (board[row][col] + board[row+1][col] + board[row+2][col] +board[row+3][col] == -4) {
+                if (currentPlayer = 1) {
+                    alert('Current Player 2 won!');
+                    }
+                }
+        }
     }
 }
