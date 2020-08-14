@@ -24,10 +24,8 @@ let tableRow = document.getElementsByClassName('row');
 let showCurrentPlayer= document.getElementById('message');
 //eventually will do indexHTML to tell whose current player and/or who won
 
-let currentPlayer=1;
+let currentPlayer= 1;
 /*---event listener---*/
-
-
 for(let i=0; i < cells.length;i++) {
     cells[i].addEventListener('click', (e) => {
         //check if working
@@ -37,9 +35,6 @@ for(let i=0; i < cells.length;i++) {
     })
     
 } 
-
-
-
 //to iterate through board
 //change clickSlots to where it's detecting column instead of row
 //clickSlots now works just fix above console.log to then assign to a variable
@@ -48,6 +43,7 @@ for(let i=0; i < cells.length;i++) {
 //think of how to update i from down level and up. I thought of push but there might be a better way
 //if board[i] ==null  && currentPlayer==1 {board.pop}
 
+/*---Functions---*/
 function clickSlots(colIdx) {
     if (board[0][colIdx]) {
         console.log('this role is filled');
@@ -65,33 +61,50 @@ function clickSlots(colIdx) {
         }
     }      
     console.log(board); 
+    horizontalCheck();
+    // verticalCheck();
+    // diagonalCheck()
     render();
 }
-/*---Functions---*/
-initialize();
 
+initialize();
 
 //to reference for win logic
 function initialize() {
-   
-    
-    turn = 1;
-    winner = null;
-    
+   turn = 1;
+    winner = null; 
 } 
 function render() {
     console.log('rendering');
-    //loop thru board and color cirlce depending on what's insde each element
+    //loop thru board and color circle depending on what's insde each element
     for(let row=0; row<board.length; row++) {
         for(let col=0; col< board[row].length; col++) {
             if (board[row][col] == 1) {
                 const cell = document.querySelector(`#row-${row}`).querySelector(`#col-${col}`);
                 cell.style.backgroundColor = 'red';
             } else if (board[row][col] == -1) {
-                // cells.style.backgroundColor = 'yellow'
+                const cell = document.querySelector(`#row-${row}`).querySelector(`#col-${col}`);
+                cell.style.backgroundColor = 'yellow';
             } else {
                 //  cells.style.backgroundColor = 'white';
              }
         }  
     }
 }            //if 1 make yellow (by this point already stated player 1 is yellow) n vice versa
+
+function horizontalCheck() {
+    console.log('inside getW')
+    for (let i =0; i <board.length; i++) {
+        for (let j =0; j < board[i].length; j++) {
+            if (board[i][j] + board[i][j+1] + board[i][j+2] + board[i][j+3] == 4) {
+                if (currentPlayer = 1) {
+            alert('Current Player 1 won!');}
+        } 
+            if (board[i][j] + board[i][j+1] + board[i][j+2] + board[i][j+3] == -4) {
+                if (currentPlayer = -1) {
+            alert('Current Player 2 won!');}
+    } 
+        }
+        
+    }
+}
