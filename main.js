@@ -27,14 +27,17 @@ let showCurrentPlayer= document.getElementById('message');
 let currentPlayer=1;
 /*---event listener---*/
 
+
 for(let i=0; i < cells.length;i++) {
     cells[i].addEventListener('click', (e) => {
         //check if working
    
         clickSlots(e.target.cellIndex);
+        
     })
     
 } 
+
 
 
 //to iterate through board
@@ -57,18 +60,13 @@ function clickSlots(colIdx) {
             board[row][colIdx] = currentPlayer;
             isFilled= false;
             currentPlayer *= -1;
-            console.log(currentPlayer);
-            render();
         } else {
             row--;
         }
-    }
+    }      
+    console.log(board); 
+    render();
 }
-
-
-
-
-
 /*---Functions---*/
 initialize();
 
@@ -82,17 +80,18 @@ function initialize() {
     
 } 
 function render() {
+    console.log('rendering');
     //loop thru board and color cirlce depending on what's insde each element
-    for(let i=0; i<board.length; i++) {
-        for(let j=0; i< board.length;i++) {
-    if (board[i][j] ===1) {
-        cells.style.backgroundColor = 'red';
-    } else if (board[i][j] === -1) {
-        cells.style.backgroundColor = 'yellow'
-    } else {
-        cells.style.backgroundColor = 'white';
+    for(let row=0; row<board.length; row++) {
+        for(let col=0; col< board[row].length; col++) {
+            if (board[row][col] == 1) {
+                const cell = document.querySelector(`#row-${row}`).querySelector(`#col-${col}`);
+                cell.style.backgroundColor = 'red';
+            } else if (board[row][col] == -1) {
+                // cells.style.backgroundColor = 'yellow'
+            } else {
+                //  cells.style.backgroundColor = 'white';
+             }
+        }  
     }
-
-    //if 1 make yellow (by this point already stated player 1 is yellow) n vice versa
-}
-}}
+}            //if 1 make yellow (by this point already stated player 1 is yellow) n vice versa
